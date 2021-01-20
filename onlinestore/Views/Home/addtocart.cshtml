@@ -1,0 +1,425 @@
+﻿
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="~/Frontent/img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>OnShop | AddtoCart</title>
+
+    <!--
+            CSS
+            ============================================= -->
+    <link rel="stylesheet" href="~/Frontent/css/linearicons.css">
+    <link rel="stylesheet" href="~/Frontent/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Frontent/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Frontent/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Frontent/css/nice-select.css">
+    <link rel="stylesheet" href="~/Frontent/css/nouislider.min.css">
+    <link rel="stylesheet" href="~/Frontent/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Frontent/css/main.css">
+    <style>
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Start Header Area -->
+    <header class="header_area sticky-header">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light main_box">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="@Url.Action("home","Home")"><img src="~/Frontent/img/logo5.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("home","Home")">Home</a></li>
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">Category</a>
+                                <ul class="dropdown-menu">
+
+
+                                    @{
+                                        var h = new onlinestore.Models.shoppingEntities().category1.ToList();
+                                        var b = new onlinestore.Models.shoppingEntities().category2.ToList();
+                                    }
+                                    @foreach (var item in h)
+                                    {
+                                        <li id="asad" class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("categoryview1","Home", new { id = item.cat1_id })" name="abc">@item.cat1_name</a>
+
+                                            <ul>
+                                                @foreach (var item1 in b)
+                                                {
+                                                    if (item.cat1_id == item1.cat2_fk_cat1)
+                                                    {
+                                                        <li class="nav-item"><a href="#" class="nav-link">@item1.cat2_name</a></li>
+                                                    }
+
+                                                }
+
+                                            </ul>
+
+
+
+
+                                        </li>
+
+                                    }
+
+                                </ul>
+
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("product1","Home")">Products</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("vacancies","Home")">Career Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("contact","Home")">Contact</a></li>
+                            @if (Session["name"] != null)
+                            {
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("logout","Home")">Logout!</a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("login","Home")">Login!</a></li>
+                            }
+
+
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+
+                            <li class="nav-item"> <a href="@Url.Action("carthistory","Home")" class="cart"><span class="ti-bag"> </span></a></li>
+
+
+                            <li class="nav-item">
+                                <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container">
+                <form class="d-flex justify-content-between">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Shopping Cart</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="category.html">Cart</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <h4 class="text-center text-success"> @TempData["ordercon"]</h4>
+           
+            <div class="cart_inner">
+               
+
+                
+                
+                    <div class="table-responsive">
+
+                        <table class="table">
+                           
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                            
+                                <tbody>
+
+
+
+                                    @{
+                                        int abctotal = 0;
+                                        int amount = 0;
+
+
+                                        foreach (var item in ViewBag.a)
+                                        {
+
+                                            var g = new onlinestore.Models.shoppingEntities().products.ToList();
+
+                                            foreach (var i in g)
+                                            {
+
+
+                                                if (item.c_id == i.pro_id)
+                                                {
+                                                    
+                                                    amount = item.c_qty * i.pro_price;
+
+
+
+
+                                                        <tr>
+                                                            <td>
+                                                                <div class="media">
+                                                                    <div class="d-flex">
+                                                                        <img src="~/productimg/@i.pro_img"  style="width:150px; height:100px;"   alt="">
+                                                                    </div>
+
+                                                                    <div class="media-body">
+                                                                        <p>@i.pro_title</p>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </td>
+                                                            <td>
+                                                                <h5>@i.pro_price</h5>
+                                                            </td>
+                                                            <td>
+                                                                <div class="product_count">
+
+
+                                                                    <input type="text" name="qty" id="sst" maxlength="12" value="@item.c_qty" title="Quantity:"
+                                                                           class="input-text qty">
+                                                                    
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <h5>@amount</h5>
+                                                            </td>
+                                                            <td> <a href="@Url.Action("removecart", "Home", new { id = @item.c_id })"><i class="fa fa-remove fa-3x" style="color:#ffba00"></i></a> </td>
+                                                        </tr>
+
+
+
+                                                }
+
+
+                                            }
+
+                                            abctotal += amount;
+
+                                        }
+                                        //var totalbil = abctotal += amount;
+
+
+                                                <tr class="bottom_button">
+                                                    <td>
+                                                     
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                        Total:  @abctotal
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                   
+                                                </tr>
+
+                                        
+                                            <div> <a href="@Url.Action("removeall", "Home")" class="genric-btn danger radius"> Remove All Cart</a> </div>
+
+
+                                        <tr class="out_button_area">
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                                
+                                                @if (Session["name"] != null)
+                                                {
+                                                <div class="checkout_btn_inner d-flex align-items-center">
+                                                    <a class="gray_btn" href="@Url.Action("home", "Home")">Continue Shopping</a>
+
+                                                    
+
+
+                                                    @using (Html.BeginForm("shopdone", "Home", FormMethod.Post))
+                                                    {
+                                                        
+                                                        <input type="hidden" name="cart_fk_log" value="@Session["id"]" />
+                                                      
+                                                    <div> <input type="submit" class="genric-btn info radius" value="Confirm Your Shopping" /> </div>
+                                                    
+                                                    }
+                                                </div>
+                                                }
+
+                                               
+
+                                                else
+                                                {
+                                            <div class="checkout_btn_inner d-flex align-items-center">
+                                                <a class="gray_btn" href="@Url.Action("home", "Home")">Continue Shopping</a>
+
+                                                <a class="genric-btn disable bg-danger text-white" href="@Url.Action("login","Home")" >Order Products</a>
+
+                                                <div class="check_title" >
+                                                    <h2 style="padding-right:25px;"> For Order Your Shopping! <a href="@Url.Action("login","Home")">Click here to login</a></h2>
+                                                </div>
+
+
+                                            </div>
+                                            
+                                           
+                                                }
+                                             </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                        
+                            </table>
+                    </div>
+
+                </div>
+           
+        </div>
+        
+    </section>
+    <!--================End Cart Area =================-->
+    <!-- start footer Area -->
+    <footer class="footer-area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>About Us</h6>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                            ut labore dolore
+                            magna aliqua.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>Newsletter</h6>
+                        <p>Stay update with our latest</p>
+                        <div class="" id="mc_embed_signup">
+
+                            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                  method="get" class="form-inline">
+
+                                <div class="d-flex flex-row">
+
+                                    <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Enter Email '" required="" type="email">
+
+
+                                    <button class="click-btn btn btn-default">
+                                        <i class="fa fa-long-arrow-right"
+                                           aria-hidden="true"></i>
+                                    </button>
+                                    <div style="position: absolute; left: -5000px;">
+                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
+                                               type="text">
+                                    </div>
+
+                                    <!-- <div class="col-lg-4 col-md-4">
+                                                    <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+                                                </div>  -->
+                                </div>
+                                <div class="info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget mail-chimp">
+                        <h6 class="mb-20">Instragram Feed</h6>
+                        <ul class="instafeed d-flex flex-wrap">
+                            <li><img src="~/Frontent/img/i1.jpg" alt=""></li>
+                            <li><img src="~/Frontent/img/i2.jpg" alt=""></li>
+                            <li><img src="~/Frontent/img/i3.jpg" alt=""></li>
+                            <li><img src="~/Frontent/img/i4.jpg" alt=""></li>
+                            <li><img src="~/Frontent/img/i5.jpg" alt=""></li>
+                            <li><img src="~/Frontent/img/i6.jpg" alt=""></li>
+                            <li><img src="~/Frontent/img/i7.jpg" alt=""></li>
+                            <li><img src="~/Frontent/img/i8.jpg" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6>Follow Us</h6>
+                        <p>Let us be social</p>
+                        <div class="footer-social d-flex align-items-center">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+               
+            </div>
+        </div>
+    </footer>
+    <!-- End footer Area -->
+
+    <script src="~/Frontent/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+    <script src="~/Frontent/js/vendor/bootstrap.min.js"></script>
+    <script src="~/Frontent/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Frontent/js/jquery.nice-select.min.js"></script>
+    <script src="~/Frontent/js/jquery.sticky.js"></script>
+    <script src="~/Frontent/js/nouislider.min.js"></script>
+    <script src="~/Frontent/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Frontent/js/owl.carousel.min.js"></script>
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+    <script src="~/Frontent/js/gmaps.min.js"></script>
+    <script src="~/Frontent/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+﻿@model List<onlinestore.Models.comment>
+@{
+    ViewBag.Title = "commentdetail";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-uppercase bg-danger col-md-12 text-center text-white"><br /> Comments<br />   <br /> </h4>
+    </div>
+</div>
+<br />
+<h4 class="text-center text-success"> @TempData["delcomment"] </h4>
+
+<div class="main-content-inner">
+    <div class="row">
+        <!-- table dark start -->
+        <div class="col-lg-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="single-table">
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead class="text-uppercase bg-danger">
+                                    <tr class="text-white">
+                                        <th scope="col">ID</th>
+                                        <th scope="col"> Name </th>
+                                        <th scope="col"> Email </th>
+
+                                        <th scope="col">Comments</th>
+                                        <th scope="col">Product|Name </th>
+                                        <th scope="col">Product|Image </th>
+                                        <th scope="col"> Date </th>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <th scope="col">action</th>
+                                        }
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+
+                                        <th scope="row">@item.c_id </th>
+                                        <td>@item.login.log_name   </td>
+                                        <td>@item.login.log_email  </td>
+
+                                        <td>@item.c_message  </td>
+                                        <td>@item.product.pro_title  </td>
+                                        <td><img src="~/productimg/@Url.Content(item.product.pro_img)" width="200px" height="200px" />  </td>
+                                        <td>@item.c_date  </td>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <td>
+
+                                                <a href="@Url.Action("commentdelete", "Admin", new { id = item.c_id })" class="badge badge-danger"> Delete </a>
+
+                                            </td>
+                                        }
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table dark end -->
+    </div>
+</div>
+
+
+

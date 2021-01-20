@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "dashboard";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+@{ 
+    var p = new onlinestore.Models.shoppingEntities().products.Count();
+    var o = new onlinestore.Models.shoppingEntities().carts.Count();
+    var u = new onlinestore.Models.shoppingEntities().logins.Count();
+    var j = new onlinestore.Models.shoppingEntities().jobs.Count();
+    var order = new onlinestore.Models.shoppingEntities().carts.ToList();
+     var product = new onlinestore.Models.shoppingEntities().products.ToList();
+    var employe = new onlinestore.Models.shoppingEntities().logins.ToList();
+}
+<!-- sales report area start -->
+<div class="sales-report-area sales-style-two">
+    <div class="row">
+        <div class="col-xl-3 col-ml-3 col-md-6 mt-5">
+            <div class="single-report">
+                <div class="s-sale-inner pt--30 mb-3">
+                    <div class="s-report-title d-flex justify-content-between">
+                        <a href="@Url.Action("prodetail","Prodictts")"><h4 class="header-title mb-0">Product Sold</h4></a>
+                        <select class="custome-select border-0 pr-3">
+                            <option>Toatal Product (@p) </option>
+                           
+                        </select>
+                    </div>
+                </div>
+                <canvas id="coin_sales4" height="100"></canvas>
+            </div>
+        </div>
+        <div class="col-xl-3 col-ml-3 col-md-6 mt-5">
+            <div class="single-report">
+                <div class="s-sale-inner pt--30 mb-3">
+                    <div class="s-report-title d-flex justify-content-between">
+                        <a href="@Url.Action("Jobdetail","Vacancies")"> <h4 class="header-title mb-0">Applyed For Job</h4></a>
+                        <select class="custome-select border-0 pr-3">
+                            <option selected="">Total (@j)</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <canvas id="coin_sales5" height="100"></canvas>
+            </div>
+        </div>
+        <div class="col-xl-3 col-ml-3 col-md-6  mt-5">
+            <div class="single-report">
+                <div class="s-sale-inner pt--30 mb-3">
+                    <div class="s-report-title d-flex justify-content-between">
+                        <a href="@Url.Action("order_detail","Admin")"> <h4 class="header-title mb-0">Orders</h4></a>
+                        <select class="custome-select border-0 pr-3">
+                            <option selected="">Total Orders (@o)</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <canvas id="coin_sales6" height="100"></canvas>
+            </div>
+        </div>
+        <div class="col-xl-3 col-ml-3 col-md-6 mt-5">
+            <div class="single-report">
+                <div class="s-sale-inner pt--30 mb-3">
+                    <div class="s-report-title d-flex justify-content-between">
+                         <a href="@Url.Action("Userdetail","Employee")"><h4 class="header-title mb-0">New Coustomers</h4></a>
+                        <select class="custome-select border-0 pr-3">
+                            <option selected="">Total (@u)</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                <canvas id="coin_sales7" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- sales report area end -->
+<!-- visitor graph area start -->
+<div class="card mt-5">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-5">
+            <h4 class="header-title mb-0">Visitor Graph</h4>
+            <select class="custome-select border-0 pr-3">
+                <option selected="">Last 7 Days</option>
+                <option value="0">Last 7 Days</option>
+            </select>
+        </div>
+        <div id="visitor_graph"></div>
+    </div>
+</div>
+<!-- visitor graph area end -->
+<!-- order list area start -->
+<div class="card mt-5">
+    <div class="card-body">
+        <h4 class="header-title">Todays Order List</h4>
+        <div class="table-responsive">
+            <table class="dbkit-table">
+                <tbody>
+                    <tr class="heading-td">
+                        <td>Product Name</td>
+                        <td>Product Code</td>
+                        <td>Order Status</td>
+                        <td>Client Number</td>
+                        <td>Quentity</td>
+                        <td>View Order</td>
+                    </tr>
+                    @foreach (var item in order)
+                    {
+                    <tr>
+                        <td>@item.product.pro_title</td>
+                        <td>@item.product.pro_id</td>
+                        <td><span class="pending_dot">Pending</span></td>
+                        <td>@item.login.log_number</td>
+                        <td>@item.cart_qty</td>
+                        <td><a href="@Url.Action("order_detail","Admin")"> View Order</a></td>
+                    </tr>
+                    }
+                  
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination_area pull-right mt-5">
+            <ul>
+                <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- order list area end -->
+<div class="row">
+    <!-- product sold area start -->
+    <div class="col-xl-8 col-lg-7 col-md-12 mt-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-4">
+                    <h4 class="header-title mb-0">Product Slod</h4>
+                    <select class="custome-select border-0 pr-3">
+                        <option selected="">Today</option>
+                        <option value="0">Last 7 Days</option>
+                    </select>
+                </div>
+                <div class="table-responsive">
+                    <table class="dbkit-table">
+                        <tbody>
+                            <tr class="heading-td">
+
+                                <td>Category 1st</td>
+                                <td>Category 2nd</td>
+                                <td>price</td>
+                                <td>Brand</td>
+                            </tr>
+                            @foreach (var pro in product)
+                            {
+                        <tr>
+
+                            <td>@pro.category1.cat1_name</td>
+                            <td>@pro.category2.cat2_name</td>
+
+                            <td>@pro.pro_price</td>
+                            <td>@pro.pro_brand</td>
+                        </tr>
+                            }
+                           
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination_area pull-right mt-5">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- product sold area end -->
+    <!-- team member area start -->
+    <div class="col-xl-4 col-lg-5 col-md-12 mt-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-sm-flex flex-wrap justify-content-between mb-4 align-items-center">
+                    <h4 class="header-title mb-0">Team Member</h4>
+                    <form class="team-search">
+                        <input type="text" name="search" placeholder="Search Here">
+                    </form>
+                </div>
+                <div class="member-box">
+                    @foreach (var emp in employe)
+                    {
+                        if (emp.log_role != "User")
+                        {
+                            <div class="s-member">
+
+                                <div class="media align-items-center">
+
+                                    <img src="~/empimages/@Url.Content(emp.emp_img)" class="d-block ui-w-30 rounded-circle" alt="">
+                                    <div class="media-body ml-5">
+                                        <p>@emp.log_name</p><span>@emp.log_role</span>
+                                    </div>
+                                    <div class="tm-social">
+                                        <a href="#"><i class="fa fa-phone"></i></a>
+                                        <a href="#"><i class="fa fa-envelope"></i></a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- team member area end -->

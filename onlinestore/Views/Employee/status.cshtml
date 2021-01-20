@@ -1,0 +1,141 @@
+﻿@model List<onlinestore.Models.login>
+@{
+    ViewBag.Title = "status";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="text-uppercase bg-dark col-md-12 text-white text-center" > Status <br /> <i class="fa fa-arrow-circle-down">  </i> </h2>
+    </div>
+</div>
+<div class="main-content-inner">
+    <div class="row">
+        <!-- table dark start -->
+        <div class="col-lg-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table text-center">
+                        <tbody class="text-uppercase bg-dark">
+                            @using (Html.BeginForm("status", "Employee"))
+                            {
+                            <tr>
+                                <td><a href="@Url.Action("status","Employee")" class="btn btn-outline-warning"> See All</a> </td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                <td>
+                                    <input type="search" name="name" value="@ViewBag.name" placeholder="Search Name" class="form-control" />
+                                </td>
+                                <td>
+                                    <input type="submit" value="Search" class="btn btn-secondary" />
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+                    <div class="single-table">
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead class="text-uppercase bg-dark">
+                                    <tr class="text-white">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Number</th>
+
+                                        <th scope="col">Password</th>
+                                        <th scope="col">Client</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Status</th>
+                                     
+                                            <th scope="col">action</th>
+                                        
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.log_role == "Employee")
+                                        {
+                                            if (item.log_role == "Admin")
+                                            {
+                                                if (item.log_status == null)
+                                                {
+                                    <tr class="table-primary">
+
+                                        <th scope="row">@item.log_id</th>
+                                        <td>@item.log_name</td>
+                                        <td>@item.log_email</td>
+                                        <td>@item.log_number</td>
+
+                                        <td>@item.log_password </td>
+                                        <td>@item.emp_client </td>
+                                        <td>@item.log_role </td>
+                                        <td>@item.log_status </td>
+                                      
+                                            <td> <a href="@Url.Action("active", "Employee", new { id = item.log_id })" class="badge badge-primary"> Active  </a> </td>
+                                        
+                                        </tr>
+
+                                                }
+                                                else
+                                                {
+
+                                                    if (item.log_status == true)
+                                                    {
+
+                                <tr class="table-success">
+
+                                    <th scope="row">@item.log_id</th>
+                                    <td>@item.log_name</td>
+                                    <td>@item.log_email</td>
+                                    <td>@item.log_number</td>
+
+                                    <td>@item.log_password </td>
+                                    <td>@item.emp_client </td>
+                                    <td>@item.log_role </td>
+                                    <td>@item.log_status </td>
+                                 
+                                        <td> <a href="@Url.Action("active", "Employee", new { id = item.log_id })" class="badge badge-primary"> Active  </a> </td>
+                                    
+                                    </tr>
+                                                    }
+
+                                                    else
+                                                    {
+                                <tr class="table-danger">
+
+                                    <th scope="row">@item.log_id</th>
+                                    <td>@item.log_name</td>
+                                    <td>@item.log_email</td>
+                                    <td>@item.log_number</td>
+
+                                    <td>@item.log_password </td>
+                                    <td>@item.emp_client </td>
+                                    <td>@item.log_role </td>
+                                    <td>@item.log_status </td>
+                                 
+                                        <td> <a href="@Url.Action("active", "Employee", new { id = item.log_id })" class="badge badge-primary"> Active  </a> </td>
+                                    
+                                    </tr>
+
+                                                    }
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table dark end -->
+    </div>
+</div>

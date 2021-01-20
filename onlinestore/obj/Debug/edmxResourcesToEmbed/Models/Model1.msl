@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="shoppingModelStoreContainer" CdmEntityContainer="shoppingEntities">
+    <EntitySetMapping Name="billings">
+      <EntityTypeMapping TypeName="shoppingModel.billing">
+        <MappingFragment StoreEntitySet="billing">
+          <ScalarProperty Name="bil_payment" ColumnName="bil_payment" />
+          <ScalarProperty Name="bil_ordernumber" ColumnName="bil_ordernumber" />
+          <ScalarProperty Name="bil_date" ColumnName="bil_date" />
+          <ScalarProperty Name="bil_id" ColumnName="bil_id" />
+          <ScalarProperty Name="bil_fk_login" ColumnName="bil_fk_login" />
+          <ScalarProperty Name="bil_firstname" ColumnName="bil_firstname" />
+          <ScalarProperty Name="bil_lastname" ColumnName="bil_lastname" />
+          <ScalarProperty Name="bil_country" ColumnName="bil_country" />
+          <ScalarProperty Name="bil_street" ColumnName="bil_street" />
+          <ScalarProperty Name="bil_city" ColumnName="bil_city" />
+          <ScalarProperty Name="bil_postcode" ColumnName="bil_postcode" />
+          <ScalarProperty Name="bil_number" ColumnName="bil_number" />
+          <ScalarProperty Name="bil_email" ColumnName="bil_email" />
+          <ScalarProperty Name="bill_address" ColumnName="bill_address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="category1">
+      <EntityTypeMapping TypeName="shoppingModel.category1">
+        <MappingFragment StoreEntitySet="category1">
+          <ScalarProperty Name="cat1_id" ColumnName="cat1_id" />
+          <ScalarProperty Name="cat1_name" ColumnName="cat1_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="category2">
+      <EntityTypeMapping TypeName="shoppingModel.category2">
+        <MappingFragment StoreEntitySet="category2">
+          <ScalarProperty Name="cat2_id" ColumnName="cat2_id" />
+          <ScalarProperty Name="cat2_fk_cat1" ColumnName="cat2_fk_cat1" />
+          <ScalarProperty Name="cat2_name" ColumnName="cat2_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contacts">
+      <EntityTypeMapping TypeName="shoppingModel.contact">
+        <MappingFragment StoreEntitySet="contact">
+          <ScalarProperty Name="con_msg" ColumnName="con_msg" />
+          <ScalarProperty Name="con_number" ColumnName="con_number" />
+          <ScalarProperty Name="con_email" ColumnName="con_email" />
+          <ScalarProperty Name="con_name" ColumnName="con_name" />
+          <ScalarProperty Name="con_id" ColumnName="con_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="carts">
+      <EntityTypeMapping TypeName="shoppingModel.cart">
+        <MappingFragment StoreEntitySet="cart">
+          <ScalarProperty Name="cart_fk_pro" ColumnName="cart_fk_pro" />
+          <ScalarProperty Name="cart_fk_log" ColumnName="cart_fk_log" />
+          <ScalarProperty Name="cart_qty" ColumnName="cart_qty" />
+          <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_search" FunctionName="shoppingModel.Store.sp_search">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="shoppingModel.sp_search_Result">
+          <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+          <ScalarProperty Name="pro_fk_cat1" ColumnName="pro_fk_cat1" />
+          <ScalarProperty Name="pro_fk_cat2" ColumnName="pro_fk_cat2" />
+          <ScalarProperty Name="pro_title" ColumnName="pro_title" />
+          <ScalarProperty Name="pro_price" ColumnName="pro_price" />
+          <ScalarProperty Name="pro_discrip" ColumnName="pro_discrip" />
+          <ScalarProperty Name="pro_img" ColumnName="pro_img" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="vacancis">
+      <EntityTypeMapping TypeName="shoppingModel.vacanci">
+        <MappingFragment StoreEntitySet="vacancis">
+          <ScalarProperty Name="v_img" ColumnName="v_img" />
+          <ScalarProperty Name="v_last_date" ColumnName="v_last_date" />
+          <ScalarProperty Name="v_discrip" ColumnName="v_discrip" />
+          <ScalarProperty Name="v_name" ColumnName="v_name" />
+          <ScalarProperty Name="v_id" ColumnName="v_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="shoppingModel.comment">
+        <MappingFragment StoreEntitySet="comment">
+          <ScalarProperty Name="c_fk_pro" ColumnName="c_fk_pro" />
+          <ScalarProperty Name="c_fk_log" ColumnName="c_fk_log" />
+          <ScalarProperty Name="c_date" ColumnName="c_date" />
+          <ScalarProperty Name="c_message" ColumnName="c_message" />
+          <ScalarProperty Name="c_id" ColumnName="c_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="jobs">
+      <EntityTypeMapping TypeName="shoppingModel.job">
+        <MappingFragment StoreEntitySet="job">
+          <ScalarProperty Name="j_age" ColumnName="j_age" />
+          <ScalarProperty Name="j_gander" ColumnName="j_gander" />
+          <ScalarProperty Name="j_experince" ColumnName="j_experince" />
+          <ScalarProperty Name="j_qualification" ColumnName="j_qualification" />
+          <ScalarProperty Name="j_address" ColumnName="j_address" />
+          <ScalarProperty Name="j_country" ColumnName="j_country" />
+          <ScalarProperty Name="j_city" ColumnName="j_city" />
+          <ScalarProperty Name="j_number" ColumnName="j_number" />
+          <ScalarProperty Name="j_email" ColumnName="j_email" />
+          <ScalarProperty Name="j_fullname" ColumnName="j_fullname" />
+          <ScalarProperty Name="j_fk_vacan" ColumnName="j_fk_vacan" />
+          <ScalarProperty Name="j_id" ColumnName="j_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="shoppingModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="pro_img3" ColumnName="pro_img3" />
+          <ScalarProperty Name="pro_img2" ColumnName="pro_img2" />
+          <ScalarProperty Name="pro_qty" ColumnName="pro_qty" />
+          <ScalarProperty Name="pro_brand" ColumnName="pro_brand" />
+          <ScalarProperty Name="pro_oldprice" ColumnName="pro_oldprice" />
+          <ScalarProperty Name="pro_img" ColumnName="pro_img" />
+          <ScalarProperty Name="pro_discrip" ColumnName="pro_discrip" />
+          <ScalarProperty Name="pro_price" ColumnName="pro_price" />
+          <ScalarProperty Name="pro_title" ColumnName="pro_title" />
+          <ScalarProperty Name="pro_fk_cat2" ColumnName="pro_fk_cat2" />
+          <ScalarProperty Name="pro_fk_cat1" ColumnName="pro_fk_cat1" />
+          <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logins">
+      <EntityTypeMapping TypeName="shoppingModel.login">
+        <MappingFragment StoreEntitySet="login">
+          <ScalarProperty Name="fk_job" ColumnName="fk_job" />
+          <ScalarProperty Name="log_status" ColumnName="log_status" />
+          <ScalarProperty Name="log_role" ColumnName="log_role" />
+          <ScalarProperty Name="emp_client" ColumnName="emp_client" />
+          <ScalarProperty Name="emp_img" ColumnName="emp_img" />
+          <ScalarProperty Name="log_password" ColumnName="log_password" />
+          <ScalarProperty Name="log_address" ColumnName="log_address" />
+          <ScalarProperty Name="log_city" ColumnName="log_city" />
+          <ScalarProperty Name="log_number" ColumnName="log_number" />
+          <ScalarProperty Name="log_email" ColumnName="log_email" />
+          <ScalarProperty Name="log_name" ColumnName="log_name" />
+          <ScalarProperty Name="log_id" ColumnName="log_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="billinggs">
+      <EntityTypeMapping TypeName="shoppingModel.billingg">
+        <MappingFragment StoreEntitySet="billingg">
+          <ScalarProperty Name="bill_date" ColumnName="bill_date" />
+          <ScalarProperty Name="bill_payment" ColumnName="bill_payment" />
+          <ScalarProperty Name="bill_postcode" ColumnName="bill_postcode" />
+          <ScalarProperty Name="bill_address" ColumnName="bill_address" />
+          <ScalarProperty Name="bill_street" ColumnName="bill_street" />
+          <ScalarProperty Name="bill_country" ColumnName="bill_country" />
+          <ScalarProperty Name="bill_city" ColumnName="bill_city" />
+          <ScalarProperty Name="bill_email" ColumnName="bill_email" />
+          <ScalarProperty Name="bill_number" ColumnName="bill_number" />
+          <ScalarProperty Name="bill_lastname" ColumnName="bill_lastname" />
+          <ScalarProperty Name="bill_firstname" ColumnName="bill_firstname" />
+          <ScalarProperty Name="bill_fk_login" ColumnName="bill_fk_login" />
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

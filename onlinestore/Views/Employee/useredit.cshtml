@@ -1,0 +1,108 @@
+﻿@model onlinestore.Models.login
+@{
+    ViewBag.Title = "useredit";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="btn btn-primary col-md-12"> Client <br /> Edit Here<br /> <i class="fa fa-arrow-circle-down">  </i> </h4>
+    </div>
+</div>
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("empedit", "Employee", FormMethod.Post))
+            {
+
+
+                <div class="form-horizontal">
+
+
+
+                    <div class="form-group offset-2">
+                        <a href="@Url.Action("Userdetail","Employee")" class="btn btn-rounded btn-info mb-3 offset-10"> View Client </a>
+                        <label class="control-label col-md-2 "> Name </label>
+
+                        <div class="col-md-8 ">
+                            @Html.TextBoxFor(e => e.log_name, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Email </label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(e => e.log_email, new { @class = "form-control" })
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Number </label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(e => e.log_number, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> City </label>
+                        <div class="col-md-8">
+
+                            @Html.TextBoxFor(e => e.log_city, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Address </label>
+                        <div class="col-md-8">
+
+                            @Html.TextBoxFor(e => e.log_address, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Role </label>
+                        <div class="col-md-8">
+
+                            @Html.TextBoxFor(e => e.log_role, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Password </label>
+                        <div class="col-md-8">
+
+                            @Html.TextBoxFor(e => e.log_password, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Status </label>
+                        <div class="col-md-8">
+
+                            @Html.TextBoxFor(e => e.log_status, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="offset-4 col-md-3">
+                            <button type="submit" class="btn btn-dark btn-lg btn-block"> Edit </button>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,56 @@
+﻿@model onlinestore.Models.category2
+@{
+    ViewBag.Title = "cat2edit";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+<div class="card">
+<div class="card-body">
+    <h4 class="btn btn-primary col-md-12"> Client <br /> Edit Here<br /> <i class="fa fa-arrow-circle-down">  </i> </h4>
+</div>
+    </div>
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("cat2edit", "Categorys", FormMethod.Post))
+            {
+
+
+                <div class="form-horizontal">
+
+
+
+                    <div class="form-group offset-2">
+                        <a href="@Url.Action("cat2list","Categorys")" class="btn btn-rounded btn-info mb-3 offset-10"> View Categoys </a>
+                        <label class="control-label col-md-2 "> 1st Category </label>
+
+                        <div class="col-md-8 ">
+                            @Html.DropDownList("cat2_fk_cat1", null, htmlAttributes: new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> 2nd Category Name  </label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(e => e.cat2_name, new { @class = "form-control" })
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="offset-4 col-md-3">
+                            <button type="submit" class="btn btn-dark btn-lg btn-block"> Edit </button>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>
+
+

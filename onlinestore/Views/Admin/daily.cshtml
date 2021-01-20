@@ -1,0 +1,165 @@
+﻿@model IEnumerable<onlinestore.Models.billingg>
+@{
+    ViewBag.Title = "daily";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+<h2>daily</h2>
+
+
+
+<div class="main-content-inner">
+    <div class="row">
+        @{
+            var b = new onlinestore.Models.shoppingEntities().carts.ToList();
+        }
+        <!-- table primary start -->
+        <div class="col-lg-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Thead Primary</h4>
+                    <div class="single-table">
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead class="text-uppercase bg-primary">
+                                    <tr class="text-white">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quntity</th>
+                                        <th scope="col">Price</th>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <th scope="col">action</th>
+                                        }
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in b)
+                                    {
+                                    <tr>
+                                        <th scope="row">@Html.DisplayFor(modelItem => item.cart_id)</th>
+                                        <td>@Html.DisplayFor(modelItem => item.login.log_email) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.product.pro_title) </td>
+                                        <td>@Html.DisplayFor(modelItem => item.cart_qty)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.product.pro_price) </td>
+
+
+
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <td>
+                                                <a href="@Url.Action("deleteorder", "Admin", new { id = item.cart_id })"> <i class="ti-trash"></i>  </a>
+                                            </td>
+                                        }
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table primary end -->
+        <!-- table success start -->
+        <div class="col-lg-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table text-center">
+                        <tbody class="text-uppercase bg-success">
+
+
+                            <tr>
+                                @using (Html.BeginForm("searchtable", "Admin", FormMethod.Post))
+                                {
+                                    <td>
+                                        <input type="date" name="start" value="@ViewBag.start" class="form-control" />
+                                    </td>
+
+                                    <td>
+                                        <input type="date" name="end" value="@ViewBag.end" class="form-control" />
+                                    </td>
+
+                                    <td>
+                                        <input type="submit" value="Search" class="btn btn-secondary" />
+                                    </td>
+
+                                }
+
+
+                                @using (Html.BeginForm("daily", "Admin", FormMethod.Post))
+                                {
+                                    <td> <input type="search" name="name" value="@ViewBag.start" class="form-control" placeholder="Search Name" /> </td>
+                                    <td> <input type="submit" value="Search" class="btn btn-danger" /> </td>
+                                }
+
+                                <td> <button> <a href="@Url.Action("order_detail","Admin")" class="btn btn-dark"> See All </a></button> </td>
+                            </tr>
+
+
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="single-table">
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead class="text-uppercase bg-success">
+                                    <tr class="text-white">
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Number</th>
+                                        <th scope="col">Country</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">Street</th>
+                                        <th scope="col">Address</th>
+
+                                        <th scope="col">Post Code</th>
+                                        <th scope="col">Payment</th>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <th scope="col">Action</th>
+                                        }
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                   
+
+                                        @foreach (var bil in Model)
+                                        {
+                                    <tr>
+                                        <th scope="row">@bil.bill_date</th>
+
+                                        <td>@bil.bill_firstname @bil.bill_lastname</td>
+                                        <td> @bil.bill_email   </td>
+                                        <td> @bil.bill_number  </td>
+                                        <td>@bil.bill_country </td>
+                                        <td>@bil.bill_city  </td>
+                                        <td> @bil.bill_street  </td>
+                                        <td>@bil.bill_address  </td>
+
+                                        <td> @bil.bill_postcode   </td>
+                                        <td>@bil.bill_payment  </td>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <td> <a href="@Url.Action("deletebilling", "Admin", new { id = bil.bill_id })"> <i class="ti-trash"></i>  </a> </td>
+                                        }
+                                        </tr>
+
+                                        }
+                                    
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

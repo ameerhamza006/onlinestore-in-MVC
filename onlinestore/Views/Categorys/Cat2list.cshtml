@@ -1,0 +1,69 @@
+﻿@model List<onlinestore.Models.category2>
+@{
+    ViewBag.Title = "Cat2list";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-uppercase bg-dark col-md-12 text-center text-white"><br /> Category 2nd<br />   <br /> </h4>
+    </div>
+</div>
+<br />
+<h4 class="text-center text-success"> @TempData["deletcat2"] </h4>
+
+<div class="main-content-inner">
+    <div class="row">
+        <!-- table dark start -->
+        <div class="col-lg-12 mt-5">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="single-table">
+                        <div class="table-responsive">
+                            <table class="table text-center">
+                                <thead class="text-uppercase bg-dark">
+                                    <tr class="text-white">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Category 1st</th>
+                                        <th scope="col">Category 2nd</th>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <th scope="col">action</th>
+                                        }
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+
+                                        <th scope="row">@item.cat2_id </th>
+                                        <td>@item.category1.cat1_name  </td>
+                                        <td>@item.cat2_name  </td>
+
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <td>
+                                                <a href="@Url.Action("cat2edit", "Categorys", new { id = item.cat2_id })" class="badge badge-success"> Edit </a> |
+                                                <a href="@Url.Action("cat2view", "Categorys", new { id = item.cat2_id })" class="badge badge-primary"> Details  </a> |
+                                                <a href="@Url.Action("cat2delete", "Categorys", new { id = item.cat2_id })" class="badge badge-danger"> Delete </a>
+
+                                            </td>
+                                        }
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table dark end -->
+    </div>
+</div>
+

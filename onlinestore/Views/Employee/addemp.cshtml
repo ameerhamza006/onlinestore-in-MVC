@@ -1,0 +1,139 @@
+﻿@model onlinestore.Models.login
+@{
+    ViewBag.Title = "addemp";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="btn btn-primary col-md-12"> Employee <br /> Add Here<br /> <i class="fa fa-arrow-circle-down">  </i> </h4>
+    </div>
+</div>
+<br />
+<h5 class="text-center text-danger"> @ViewBag.eror </h5>
+<h5 class="text-center text-success"> @ViewBag.add </h5>
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("addemp", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+
+                <div class="form-horizontal">
+
+
+
+                    <div class="form-group offset-2">
+                        <a href="@Url.Action("empdetail", "Employee")" class="btn btn-rounded btn-info mb-3 offset-10"> View Employees </a>
+                        <label class="control-label col-md-2 offset-5 "> Select Name </label>
+
+                        <div class="col-md-9 offset-1">
+                            @Html.DropDownList("fk_job", null, "--Select Employee--", new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="form-group offset-2">
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Name </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_name, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Email </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_email, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Number </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_number, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> City </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_city, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Address </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_address, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Password </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_password, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Role </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_role, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Client </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.emp_client, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                        </div>
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Status </label>
+                            <div class="col-md-8">
+                                @Html.EditorFor(a => a.log_status, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group offset-2">
+                            <label class="control-label col-md-2"> Photo </label>
+                            <div class="col-md-8">
+
+                                <input type="file" name="pic" class="form-control"/>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="offset-4 col-md-3">
+                                <button type="submit" class="btn btn-dark btn-lg btn-block"> Registr Employee </button>
+
+                            </div>
+                        </div>
+                  
+
+            
+
+
+            }
+    </div>
+</div>
+    </div>

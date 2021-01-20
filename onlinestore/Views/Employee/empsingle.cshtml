@@ -1,0 +1,95 @@
+﻿@model onlinestore.Models.login
+@{
+    ViewBag.Title = "empsingle";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-body">
+
+        <div class="s-member">
+            <div class="media align-items-center">
+                <img src="~/empimages/@Url.Content(Model.emp_img)" class="d-block rounded-circle" style="width:1500px; height:80px;" alt="">
+                <div class="media-body ml-5">
+                    <p>@Model.log_name</p><span>@Model.log_role</span>
+                </div>
+                <div class="tm-social">
+                    <a href="#"><i class="fa fa-phone"></i></a>
+                    <a href="#"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        @*<h4 class="text-uppercase bg-dark col-md-12 text-center text-white"><br /> Employee Details<br />   <br /> </h4>*@
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+
+       <table class="table">
+           <tbody>
+               <tr>
+                   <th></th>
+                   <th></th> <th></th> <th></th> <th></th> <th></th> <th> Information</th> <th></th> <th></th><th></th>
+                   <th></th> <th></th> <th></th> <th> </th> <th></th> <th></th><th></th> <th></th> <th></th> 
+                   <th></th> <th></th> <th></th> <th>Others</th> <th></th> <th>  </th> <th></th> <th></th> <th></th> 
+                   <th></th>
+
+               </tr>
+                 <tr>
+                   <td></td>
+                   <td></td> <td></td> <td></td> <td></td> <td></td> <td> City : @Model.job.j_city </td> <th></th> <th></th><th></th>
+                   <th></th> <th></th> <th></th> <th> </th> <th></th> <th></th><th></th> <th></th> <th></th> 
+                   <th></th> <th></th> <th></th> <td> Email : @Model.job.j_email </td> <th></th> <th></th> <th></th> <th></th> <th></th> 
+                   <th></th>
+
+               </tr>
+                <tr>
+                   <td></td>
+                   <td></td> <td></td> <td></td> <td></td> <td></td> <td> Country : @Model.job.j_country</td> <th></th> <th></th><th></th>
+                   <th></th> <th></th> <th></th> <th> </th> <th></th> <th></th><th></th> <th></th> <th></th> 
+                   <th></th> <th></th> <th></th> <td> Number : @Model.job.j_number </td> <th></th> <th></th> <th></th> <th></th> <th></th> 
+                   <th></th>
+
+               </tr>
+               <tr>
+                   <td></td>
+                   <td></td> <td></td> <td></td> <td></td> <td></td> <td> Education : @Model.job.j_qualification</td> <th></th> <th></th><th></th>
+                   <th></th> <th></th> <th></th> <th> </th> <th></th> <th></th><th></th> <th></th> <th></th> 
+                   <th></th> <th></th> <th></th> <td> Clients : @Model.emp_client </td> <th></th> <th></th> <th></th> <th></th> <th></th> 
+                   <th></th>
+
+               </tr>
+               <tr>
+                   <td></td>
+                   <td></td> <td></td> <td></td> <td></td> <td></td> <td> Address : @Model.job.j_address</td> <th></th> <th></th><th></th>
+                   <th></th> <th></th> <th></th> <th> </th> <th></th> <th></th><th></th> <th></th> <th></th> 
+                   <th></th> <th></th> <th></th> <td> Experinces : @Model.job.j_experince </td> <th></th> <th></th> <th></th> <th></th> <th></th> 
+                   <th></th>
+
+               </tr>
+                <tr>
+                   <td></td>
+                   <td></td> <td></td> <td></td> <td></td> <td></td> <td> Gander : @Model.job.j_gander</td> <th></th> <th></th><th></th>
+                   <th></th> <th></th> <th></th> <th> </th> <th></th> <th></th><th></th> <th></th> <th></th> 
+                   <th></th> <th></th> <th></th> <td> Password : @Session["Password"]</td> <th></th> <th></th> <th></th> <th></th> <th></th> 
+                   <th></th>
+
+               </tr>
+                <tr>
+                   <td></td>
+                   <td></td> <td></td> <td></td> <td></td> <td></td> <td> Date Of Birth : @Model.job.j_age  </td> <th></th> <th></th><th></th>
+                   <th></th> <th></th> <th></th> <th> </th> <th></th> <th></th><th></th> <th></th> <th></th> 
+                   <th></th> <th></th> <th></th> <td>  </td> <th></th> <th></th> <th></th> <th></th> <th></th> 
+                   <th></th>
+
+               </tr>
+           </tbody>
+       </table>
+
+        
+    </div>
+</div>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="228ca633f75246ba8c856bab5705b2fc" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="shoppingModel.billing" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="shoppingModel.category1" Width="1.5" PointX="2.625" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="shoppingModel.category2" Width="1.5" PointX="0.5" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="shoppingModel.FK__category2__cat2___2D27B809" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="shoppingModel.contact" Width="1.5" PointX="7.25" PointY="1.75" />
+        <EntityTypeShape EntityType="shoppingModel.cart" Width="1.5" PointX="8" PointY="4.5" />
+        <EntityTypeShape EntityType="shoppingModel.vacanci" Width="1.5" PointX="6.875" PointY="7.875" />
+        <EntityTypeShape EntityType="shoppingModel.comment" Width="1.5" PointX="9.125" PointY="7.75" />
+        <EntityTypeShape EntityType="shoppingModel.job" Width="1.5" PointX="6.625" PointY="10.75" />
+        <AssociationConnector Association="shoppingModel.FK__job__j_fk_vacan__02FC7413" />
+        <EntityTypeShape EntityType="shoppingModel.product" Width="1.5" PointX="10.875" PointY="2.25" />
+        <AssociationConnector Association="shoppingModel.FK__cart__cart_fk_pr__6383C8BA" />
+        <AssociationConnector Association="shoppingModel.FK__product__pro_fk___300424B4" />
+        <AssociationConnector Association="shoppingModel.FK__product__pro_fk___30F848ED" />
+        <AssociationConnector Association="shoppingModel.FK__comment__c_fk_pr__72C60C4A" />
+        <EntityTypeShape EntityType="shoppingModel.login" Width="1.5" PointX="8.875" PointY="11.5" />
+        <AssociationConnector Association="shoppingModel.FK__billing__bil_fk___37A5467C" />
+        <AssociationConnector Association="shoppingModel.FK__cart__cart_fk_lo__628FA481" />
+        <AssociationConnector Association="shoppingModel.FK__comment__c_fk_lo__71D1E811" />
+        <AssociationConnector Association="shoppingModel.FK_login_job" />
+        <EntityTypeShape EntityType="shoppingModel.billingg" Width="1.5" PointX="11.125" PointY="11.75" />
+        <AssociationConnector Association="shoppingModel.FK__billingg__bill_f__3C34F16F" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

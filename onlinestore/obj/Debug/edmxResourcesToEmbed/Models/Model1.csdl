@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="billing">
+    <Key>
+      <PropertyRef Name="bil_id" />
+    </Key>
+    <Property Name="bil_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bil_fk_login" Type="Int32" />
+    <Property Name="bil_firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bil_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bil_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bil_street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bil_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bil_postcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bil_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bil_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="bil_date" Type="DateTime" Precision="0" />
+    <Property Name="bil_ordernumber" Type="Int64" />
+    <Property Name="bil_payment" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="login" Relationship="shoppingModel.FK__billing__bil_fk___37A5467C" FromRole="billing" ToRole="login" />
+  </EntityType>
+  <EntityType Name="category1">
+    <Key>
+      <PropertyRef Name="cat1_id" />
+    </Key>
+    <Property Name="cat1_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat1_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="category2" Relationship="Self.FK__category2__cat2___2D27B809" FromRole="category1" ToRole="category2" />
+    <NavigationProperty Name="products" Relationship="shoppingModel.FK__product__pro_fk___300424B4" FromRole="category1" ToRole="product" />
+  </EntityType>
+  <EntityType Name="category2">
+    <Key>
+      <PropertyRef Name="cat2_id" />
+    </Key>
+    <Property Name="cat2_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat2_fk_cat1" Type="Int32" />
+    <Property Name="cat2_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="category1" Relationship="Self.FK__category2__cat2___2D27B809" FromRole="category2" ToRole="category1" />
+    <NavigationProperty Name="products" Relationship="shoppingModel.FK__product__pro_fk___30F848ED" FromRole="category2" ToRole="product" />
+  </EntityType>
+  <Association Name="FK__category2__cat2___2D27B809">
+    <End Role="category1" Type="Self.category1" Multiplicity="0..1" />
+    <End Role="category2" Type="Self.category2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category1">
+        <PropertyRef Name="cat1_id" />
+      </Principal>
+      <Dependent Role="category2">
+        <PropertyRef Name="cat2_fk_cat1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="shoppingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="billings" EntityType="Self.billing" />
+    <EntitySet Name="category1" EntityType="Self.category1" />
+    <EntitySet Name="category2" EntityType="Self.category2" />
+    <AssociationSet Name="FK__category2__cat2___2D27B809" Association="Self.FK__category2__cat2___2D27B809">
+      <End Role="category1" EntitySet="category1" />
+      <End Role="category2" EntitySet="category2" />
+    </AssociationSet>
+    <EntitySet Name="contacts" EntityType="shoppingModel.contact" />
+    <EntitySet Name="carts" EntityType="shoppingModel.cart" />
+    <FunctionImport Name="sp_search" ReturnType="Collection(shoppingModel.sp_search_Result)">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="price" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="vacancis" EntityType="shoppingModel.vacanci" />
+    <EntitySet Name="comments" EntityType="shoppingModel.comment" />
+    <EntitySet Name="jobs" EntityType="shoppingModel.job" />
+    <AssociationSet Name="FK__job__j_fk_vacan__02FC7413" Association="shoppingModel.FK__job__j_fk_vacan__02FC7413">
+      <End Role="vacanci" EntitySet="vacancis" />
+      <End Role="job" EntitySet="jobs" />
+    </AssociationSet>
+    <EntitySet Name="products" EntityType="shoppingModel.product" />
+    <AssociationSet Name="FK__cart__cart_fk_pr__6383C8BA" Association="shoppingModel.FK__cart__cart_fk_pr__6383C8BA">
+      <End Role="product" EntitySet="products" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__pro_fk___300424B4" Association="shoppingModel.FK__product__pro_fk___300424B4">
+      <End Role="category1" EntitySet="category1" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__pro_fk___30F848ED" Association="shoppingModel.FK__product__pro_fk___30F848ED">
+      <End Role="category2" EntitySet="category2" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comment__c_fk_pr__72C60C4A" Association="shoppingModel.FK__comment__c_fk_pr__72C60C4A">
+      <End Role="product" EntitySet="products" />
+      <End Role="comment" EntitySet="comments" />
+    </AssociationSet>
+    <EntitySet Name="logins" EntityType="shoppingModel.login" />
+    <AssociationSet Name="FK__billing__bil_fk___37A5467C" Association="shoppingModel.FK__billing__bil_fk___37A5467C">
+      <End Role="login" EntitySet="logins" />
+      <End Role="billing" EntitySet="billings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__cart_fk_lo__628FA481" Association="shoppingModel.FK__cart__cart_fk_lo__628FA481">
+      <End Role="login" EntitySet="logins" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__comment__c_fk_lo__71D1E811" Association="shoppingModel.FK__comment__c_fk_lo__71D1E811">
+      <End Role="login" EntitySet="logins" />
+      <End Role="comment" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_login_job" Association="shoppingModel.FK_login_job">
+      <End Role="job" EntitySet="jobs" />
+      <End Role="login" EntitySet="logins" />
+    </AssociationSet>
+    <EntitySet Name="billinggs" EntityType="shoppingModel.billingg" />
+    <AssociationSet Name="FK__billingg__bill_f__3C34F16F" Association="shoppingModel.FK__billingg__bill_f__3C34F16F">
+      <End Role="login" EntitySet="logins" />
+      <End Role="billingg" EntitySet="billinggs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="contact">
+    <Key>
+      <PropertyRef Name="con_id" />
+    </Key>
+    <Property Name="con_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="con_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="con_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="con_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="con_msg" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="cart_id" />
+    </Key>
+    <Property Name="cart_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cart_qty" Type="Int32" />
+    <Property Name="cart_fk_log" Type="Int32" />
+    <Property Name="cart_fk_pro" Type="Int32" />
+    <NavigationProperty Name="product" Relationship="shoppingModel.FK__cart__cart_fk_pr__6383C8BA" FromRole="cart" ToRole="product" />
+    <NavigationProperty Name="login" Relationship="shoppingModel.FK__cart__cart_fk_lo__628FA481" FromRole="cart" ToRole="login" />
+  </EntityType>
+  <ComplexType Name="sp_search_Result">
+    <Property Type="Int32" Name="pro_id" Nullable="false" />
+    <Property Type="Int32" Name="pro_fk_cat1" Nullable="true" />
+    <Property Type="Int32" Name="pro_fk_cat2" Nullable="true" />
+    <Property Type="String" Name="pro_title" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="pro_price" Nullable="true" />
+    <Property Type="String" Name="pro_discrip" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="pro_img" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="vacanci">
+    <Key>
+      <PropertyRef Name="v_id" />
+    </Key>
+    <Property Name="v_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="v_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="v_discrip" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="v_last_date" Type="DateTime" Precision="0" />
+    <Property Name="v_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="jobs" Relationship="shoppingModel.FK__job__j_fk_vacan__02FC7413" FromRole="vacanci" ToRole="job" />
+  </EntityType>
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="c_id" />
+    </Key>
+    <Property Name="c_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="c_message" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="c_date" Type="DateTime" Precision="0" />
+    <Property Name="c_fk_log" Type="Int32" />
+    <Property Name="c_fk_pro" Type="Int32" />
+    <NavigationProperty Name="product" Relationship="shoppingModel.FK__comment__c_fk_pr__72C60C4A" FromRole="comment" ToRole="product" />
+    <NavigationProperty Name="login" Relationship="shoppingModel.FK__comment__c_fk_lo__71D1E811" FromRole="comment" ToRole="login" />
+  </EntityType>
+  <EntityType Name="job">
+    <Key>
+      <PropertyRef Name="j_id" />
+    </Key>
+    <Property Name="j_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="j_fk_vacan" Type="Int32" />
+    <Property Name="j_fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_qualification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_experince" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_gander" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="j_age" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="vacanci" Relationship="shoppingModel.FK__job__j_fk_vacan__02FC7413" FromRole="job" ToRole="vacanci" />
+    <NavigationProperty Name="logins" Relationship="shoppingModel.FK_login_job" FromRole="job" ToRole="login" />
+  </EntityType>
+  <Association Name="FK__job__j_fk_vacan__02FC7413">
+    <End Type="shoppingModel.vacanci" Role="vacanci" Multiplicity="0..1" />
+    <End Type="shoppingModel.job" Role="job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vacanci">
+        <PropertyRef Name="v_id" />
+      </Principal>
+      <Dependent Role="job">
+        <PropertyRef Name="j_fk_vacan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="pro_id" />
+    </Key>
+    <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pro_fk_cat1" Type="Int32" />
+    <Property Name="pro_fk_cat2" Type="Int32" />
+    <Property Name="pro_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_price" Type="Int32" />
+    <Property Name="pro_discrip" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="pro_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_oldprice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="pro_brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pro_qty" Type="Int32" />
+    <Property Name="pro_img2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pro_img3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="carts" Relationship="shoppingModel.FK__cart__cart_fk_pr__6383C8BA" FromRole="product" ToRole="cart" />
+    <NavigationProperty Name="category1" Relationship="shoppingModel.FK__product__pro_fk___300424B4" FromRole="product" ToRole="category1" />
+    <NavigationProperty Name="category2" Relationship="shoppingModel.FK__product__pro_fk___30F848ED" FromRole="product" ToRole="category2" />
+    <NavigationProperty Name="comments" Relationship="shoppingModel.FK__comment__c_fk_pr__72C60C4A" FromRole="product" ToRole="comment" />
+  </EntityType>
+  <Association Name="FK__cart__cart_fk_pr__6383C8BA">
+    <End Type="shoppingModel.product" Role="product" Multiplicity="0..1" />
+    <End Type="shoppingModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="cart_fk_pro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__pro_fk___300424B4">
+    <End Type="shoppingModel.category1" Role="category1" Multiplicity="0..1" />
+    <End Type="shoppingModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category1">
+        <PropertyRef Name="cat1_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="pro_fk_cat1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__pro_fk___30F848ED">
+    <End Type="shoppingModel.category2" Role="category2" Multiplicity="0..1" />
+    <End Type="shoppingModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category2">
+        <PropertyRef Name="cat2_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="pro_fk_cat2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comment__c_fk_pr__72C60C4A">
+    <End Type="shoppingModel.product" Role="product" Multiplicity="0..1" />
+    <End Type="shoppingModel.comment" Role="comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="pro_id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="c_fk_pro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="log_id" />
+    </Key>
+    <Property Name="log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="log_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="log_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="log_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="log_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="log_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="log_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="emp_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="emp_client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="log_role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="log_status" Type="Boolean" />
+    <Property Name="fk_job" Type="Int32" />
+    <NavigationProperty Name="billings" Relationship="shoppingModel.FK__billing__bil_fk___37A5467C" FromRole="login" ToRole="billing" />
+    <NavigationProperty Name="carts" Relationship="shoppingModel.FK__cart__cart_fk_lo__628FA481" FromRole="login" ToRole="cart" />
+    <NavigationProperty Name="comments" Relationship="shoppingModel.FK__comment__c_fk_lo__71D1E811" FromRole="login" ToRole="comment" />
+    <NavigationProperty Name="job" Relationship="shoppingModel.FK_login_job" FromRole="login" ToRole="job" />
+    <NavigationProperty Name="billinggs" Relationship="shoppingModel.FK__billingg__bill_f__3C34F16F" FromRole="login" ToRole="billingg" />
+  </EntityType>
+  <Association Name="FK__billing__bil_fk___37A5467C">
+    <End Type="shoppingModel.login" Role="login" Multiplicity="0..1" />
+    <End Type="shoppingModel.billing" Role="billing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="log_id" />
+      </Principal>
+      <Dependent Role="billing">
+        <PropertyRef Name="bil_fk_login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__cart_fk_lo__628FA481">
+    <End Type="shoppingModel.login" Role="login" Multiplicity="0..1" />
+    <End Type="shoppingModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="log_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="cart_fk_log" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__comment__c_fk_lo__71D1E811">
+    <End Type="shoppingModel.login" Role="login" Multiplicity="0..1" />
+    <End Type="shoppingModel.comment" Role="comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="log_id" />
+      </Principal>
+      <Dependent Role="comment">
+        <PropertyRef Name="c_fk_log" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_login_job">
+    <End Type="shoppingModel.job" Role="job" Multiplicity="0..1" />
+    <End Type="shoppingModel.login" Role="login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="job">
+        <PropertyRef Name="j_id" />
+      </Principal>
+      <Dependent Role="login">
+        <PropertyRef Name="fk_job" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="billingg">
+    <Key>
+      <PropertyRef Name="bill_id" />
+    </Key>
+    <Property Name="bill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bill_fk_login" Type="Int32" />
+    <Property Name="bill_firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_postcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_payment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bill_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="login" Relationship="shoppingModel.FK__billingg__bill_f__3C34F16F" FromRole="billingg" ToRole="login" />
+  </EntityType>
+  <Association Name="FK__billingg__bill_f__3C34F16F">
+    <End Type="shoppingModel.login" Role="login" Multiplicity="0..1" />
+    <End Type="shoppingModel.billingg" Role="billingg" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="log_id" />
+      </Principal>
+      <Dependent Role="billingg">
+        <PropertyRef Name="bill_fk_login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

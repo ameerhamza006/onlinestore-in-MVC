@@ -1,0 +1,74 @@
+﻿@model onlinestore.Models.vacanci
+@{
+    ViewBag.Title = "addvacanci";
+    Layout = "~/Views/shared/backtheme.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-uppercase bg-primary text-white col-md-12 text-center"> <br /> Vacancies  Add Here <br /> <br /> </h4>
+    </div>
+</div>
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("addvacanci", "Vacancies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+              
+
+                <div class="form-horizontal">
+
+
+
+                    <div class="form-group offset-2">
+                        <a href="@Url.Action("vacandetail","Vacancies")" class="btn btn-rounded btn-info mb-3 offset-10"> View Product </a>
+                        <label class="control-label col-md-2 "> Vcancie Name </label>
+
+                        <div class="col-md-8">
+                           @Html.TextBoxFor(a => a.v_name,new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Last Date </label>
+                        <div class="col-md-8">
+                            <input type="date" name="v_last_date" class="form-control" />
+                           
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Discription </label>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(a => a.v_discrip, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                  
+
+                    <div class="form-group offset-2">
+                        <label class="control-label col-md-2"> Photo </label>
+                        <div class="col-md-8">
+
+                            <input type="file" name="img" class="form-control" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="offset-4 col-md-3">
+                            <button type="submit" class="btn btn-dark btn-lg btn-block"> Add vacancie </button>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>
+
